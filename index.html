@@ -228,7 +228,7 @@
                 $('.monthly-actives').text(addCommas(monthlyActives));
             });
 
-            var dailyQuery = MP.api.query('/api/2.0/events/', {event:events, unit: 'day', union: 1, interval:1, type:'unique'}, {dataType: 'json'});
+            var dailyQuery = MP.api.query('/api/2.0/events/', {event:events, unit: 'day', union: 1, interval:1, from:moment().subtract(20, 'days'), to:moment().subtract(8, 'days'), type:'unique'}, {dataType: 'json'});
             dailyQuery.done(function(json){
 
                 var data = _.values(json.data.values)[0];
@@ -255,8 +255,7 @@
 
             var pageViewParams = {limit: 25, type:'unique', unit:'day', from: moment().subtract(50, 'days'), to: moment().subtract(10, 'days')}
             var pageViewQuery = MP.api.segment('Video Published', 'Publishing Platform', pageViewParams)
-            console.log('AKs query: ')
-            console.log(pageViewQuery)
+            
 
             pageViewQuery.done(function(results){
                 var data = {}
