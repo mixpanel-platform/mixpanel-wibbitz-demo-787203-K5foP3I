@@ -255,7 +255,8 @@
 
             var pageViewParams = {limit: 25, type:'unique', unit:'minute', from: moment(), to: moment()}
             var pageViewQuery = MP.api.segment('Video Published', 'Publishing Platform', pageViewParams)
-            console.log('AKs query: ' + pageViewQuery)
+            console.log('AKs query: ')
+            console.log(pageViewQuery)
 
             pageViewQuery.done(function(results){
                 var data = {}
