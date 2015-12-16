@@ -253,7 +253,7 @@
             $('.date-time').text(time);
             $('.date-pm').text(ampm);
 
-            var pageViewParams = {limit: 25, type:'unique', unit:'minute', from: moment(), to: moment()}
+            var pageViewParams = {limit: 25, type:'unique', unit:'day', from: moment().subtract(50, 'days'), to: moment().subtract(10, 'days')}
             var pageViewQuery = MP.api.segment('Video Published', 'Publishing Platform', pageViewParams)
             console.log('AKs query: ')
             console.log(pageViewQuery)
