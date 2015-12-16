@@ -183,7 +183,7 @@
 
         var refresh = function(){
           /* Get total event counts */
-            var query = MP.api.query('/api/2.0/events/', {event:events, unit: 'day', from:moment().subtract(30), to:moment.subtract(10), union: 1, type:'unique'}, {dataType: 'json'})
+            var query = MP.api.query('/api/2.0/events/', {event:events, unit: 'day', from:moment().subtract(30), to:moment().subtract(5), union: 1, type:'unique'}, {dataType: 'json'})
             query.done(function(json) {
               var values = json.data.values;
               var data = _.values(json.data.values)[0];
