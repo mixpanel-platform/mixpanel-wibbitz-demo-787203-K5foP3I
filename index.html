@@ -154,8 +154,51 @@
                </div>
         </div>
 
+<br/><br/><br/>
+<!-- demo report -->
+<div>Interactive Data Reporting</div>
 
+    <div class="mixpanel-platform-section">
+      <div id="eventSelect" style="float: left;"></div>
+      <div id="by" class="mixpanel-platform-label" style="margin-left: 10px; display: none;">by</div>
+      <div id="propSelect" style="float: left;"></div>
+      <div id="dateSelect" style="float: right;"></div>
+      <div style="clear: both;"></div>
+      <div id="graph"></div>
+    </div>
+    <div id="table"></div>
+    <script>
+      var eventSelect = $('#eventSelect').MPEventSelect();
+      var propSelect  = $('#propSelect').MPPropertySelect();
+      var dateSelect  = $('#dateSelect').MPDatepicker();
+      var eventGraph  = $('#graph').MPChart({chartType: 'line'});
+      var eventTable  = $('#table').MPTable({
+        showPercentages: true,
+        firstColHeader: 'Event'
+      });
 
+      var runQuery = function() {
+        var eventName = eventSelect.MPEventSelect('value'),
+            propName  = propSelect.MPPropertySelect('value'),
+            dateRange = dateSelect.MPDatepicker('value');
+
+        if (eventName) {
+          MP.api.segment(eventName, propName, dateRange).done(function(results) {
+            eventGraph.MPChart('setData', results);
+            eventTable.MPTable('setData', results);
+          });
+        }
+      };
+      eventSelect.on('change', function(e, eventName) {
+        propSelect.MPPropertySelect('setEvent', eventName);
+        $("#by").show();
+        runQuery();
+      });
+      propSelect.on('change', runQuery);
+      dateSelect.on('change', runQuery);
+    </script>
+
+<!-- queries for DAUs -->
     <script>
         /* Also, she asked about chartbeat style reports (number of simultaneous users). 
         do you think we could do these with custom reports as well? I imagine it would be just like the number of unique users who sent some selection of events at 
