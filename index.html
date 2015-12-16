@@ -238,8 +238,8 @@
                 $('.daily-actives').text(addCommas(dailyActives));
             })
             /* Date Refresh */
-            var date = 1447833600;
-            var day = date.getDate()
+            var date = new Date();
+            var day = date.getDate();
             var hours = date.getHours();
             var convertedHours = hours <= 12 ? hours : hours - 12;
             var ampm = hours >= 12 ? 'pm' : 'am';
